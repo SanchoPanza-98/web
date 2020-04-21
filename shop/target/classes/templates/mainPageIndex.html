@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MainPage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+
+    <script th:src="@{/mainPage.js}"></script>
+    <link th:href="@{/mainPage.css}" rel="stylesheet" />
+</head>
+<body ng-app="MainPageManagement" ng-controller="MainPageController">
+<h3>
+    Main Page
+</h3>
+
+<a href="/api/buyer">Register</a>
+<a href="/api/profile">Profile</a>
+<table border="2">
+    <tr>
+        <th>Product Name</th>
+        <th>Product Cost</th>
+        <th>Buy</th>
+        <th>Put In Basket</th>
+    </tr>
+    <!-- $scope.products -->
+    <tr ng-repeat="product in products">
+        <td >{{ product.productName }}</td>
+        <td> {{ product.cost }}</td>
+        <td>
+            <a ng-click="buy(product)" class="buy-button">Buy now</a>
+        </td>
+        <td>
+            <a ng-click="basketAdd(product)" class="basketAdd-button">Add in basket</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

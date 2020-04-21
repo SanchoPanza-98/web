@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buyer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+
+    <script th:src="@{/registerBuyer.js}"></script>
+    <link th:href="@{/registerBuyer.css}" rel="stylesheet" />
+
+    <head>
+<body ng-app="BuyerManagement" ng-controller="BuyerController">
+<h3>
+    CRUD: REGISTER BUYER
+</h3>
+<form ng-submit="submitBuyer()">
+    <table border="0">
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" ng-model="buyerRequest.firstName" /></td>
+        </tr>
+        <tr>
+            <td>Second Name</td>
+            <td><input type="text" ng-model="buyerRequest.secondName"  /></td>
+        </tr>
+        <tr>
+            <td>Patronymic</td>
+            <td><input type="text" ng-model="buyerRequest.patronymic"  /></td>
+        </tr>
+        <tr>
+            <td>Birthday date</td>
+            <td><input type="date" ng-model="buyerRequest.birthday"/></td>
+        </tr>
+        <tr>
+            <td>Telephone Number</td>
+            <td><input type="text" ng-model="buyerRequest.telephoneNum"  /></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" ng-model="buyerRequest.email"  /></td>
+        </tr>
+        <tr>
+            <td>Login</td>
+            <td><input type="text" ng-model="buyerRequest.login"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="text" ng-model="buyerRequest.password"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Submit" class="blue-button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

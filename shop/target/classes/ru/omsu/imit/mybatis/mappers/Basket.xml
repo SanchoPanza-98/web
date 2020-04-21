@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BasketMapper">
+
+	<resultMap id="resultSelectedProducts" type="SelectedProductsInBasket">
+		<id property="id" column="id" />
+		<result property="quantity" column="quantity"/>
+
+		<association property="product" column="productid" javaType="ru.omsu.imit.model.Product">
+			<id property="id" column="productid"/>
+		</association>
+		<association property="basket" column="basketid" javaType="ru.omsu.imit.model.Basket">
+			<id property="id" column="basketid"/>
+			<result property="buyer.id" column="buyerid"/>
+		</association>
+	</resultMap>
+	<select id="getProductsInBasket" parameterType="int" resultMap="resultSelectedProducts">
+		SELECT
+		selectedProductsInBasket.id as id,  basketid, basket.buyerid as buyerid , productid , quantity
+		FROM basket
+		JOIN selectedProductsInBasket ON selectedProductsInBasket.basketid = basket.id and basket.buyerid=#{id}
+	</select>
+
+</mapper>

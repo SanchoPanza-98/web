@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PurchaseMapper">
+
+    <resultMap id="resultSelectedProducts" type="SelectedProductsInPurchase" >
+        <id property="id" column="id" />
+        <result property="quantity" column="quantity"/>
+        <association property="product" column="productid" javaType="ru.omsu.imit.model.Product">
+            <id property="id" column="productid"/>
+        </association>
+        <association property="purchase" column="purchaseid" javaType="ru.omsu.imit.model.Purchase">
+            <id property="id" column="purchaseid"/>
+            <result property="buyer.id" column="buyerid"/>
+            <result property="payment" column="payment"/>
+            <result property="purchaseDate" column = "purchaseDate"/>
+        </association>
+    </resultMap>
+    
+    <resultMap id="resultSumPurchase" type="Integer">
+        <id property="id" column="id" />
+        <result property="sum" column="sumPurchase"/>
+    </resultMap>
+
+    <select id="getProductsInPurchase" parameterType="int" resultMap="resultSelectedProducts">
+        SELECT
+        selectedProductsInPurchase.id as id, purchaseid, purchaseDate, payment,buyerid,  productid , quantity
+        FROM purchase
+        JOIN selectedProductsInPurchase ON selectedProductsInPurchase.purchaseid = purchase.id and purchase.buyerid=#{id}
+    </select>
+
+    <select id="getSumPurchase" parameterType="int" resultType="int">
+        SELECT
+            sum(productPurchase.quantity * productPurchase.cost) as sumPurchase
+        FROM purchase
+        JOIN
+        (SELECT selectedProductsInPurchase.id as selectedId, purchaseid, quantity, productid, cost
+        FROM selectedProductsInPurchase
+        JOIN product
+        ON selectedProductsInPurchase.productid = product.id) AS productPurchase
+        ON productPurchase.purchaseid = purchase.id AND purchase.id = #{id};
+    </select>
+
+
+</mapper>

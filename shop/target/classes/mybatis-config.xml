@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<properties resource='mysql.jdbc.properties' />
+
+	<settings>
+<!-- instead of setting here, it is possible to set Configuration properties after creating SqlSessionFactory  -->
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="SelectedProductsInBasket" type="ru.omsu.imit.model.SelectedProductInBasket" />
+		<typeAlias alias="SelectedProductsInPurchase" type="ru.omsu.imit.model.SelectedProductInPurchase" />
+	</typeAliases>
+
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type='JDBC' />
+			<dataSource type='POOLED'>
+				<property name='driver' value='${jdbc.driverClassName}' />
+				<property name='url' value='${jdbc.url}' />
+				<property name='username' value='${jdbc.username}' />
+				<property name='password' value='${jdbc.password}' />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper class="ru.omsu.imit.mappers.BuyerMapper"/>
+		<mapper class="ru.omsu.imit.mappers.BasketMapper"/>
+		<mapper class="ru.omsu.imit.mappers.ProductMapper"/>
+		<mapper class="ru.omsu.imit.mappers.PurchaseMapper"/>
+		<mapper class="ru.omsu.imit.mappers.SelectedProductInBasketMapper"/>
+		<mapper class="ru.omsu.imit.mappers.SelectedProductInPurchaseMapper"/>
+		<mapper class="ru.omsu.imit.mappers.UserMapper"/>
+		<mapper resource="ru/omsu/imit/mybatis/mappers/Basket.xml" />
+
+		<mapper resource="ru/omsu/imit/mybatis/mappers/MapperPurchase.xml"/>
+
+	</mappers>
+
+</configuration>

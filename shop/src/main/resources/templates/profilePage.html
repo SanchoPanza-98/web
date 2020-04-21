@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+
+    <script th:src="@{/main.js}"></script>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+
+    <head>
+<body ng-app="ProfileManagement" ng-controller="ProfileController">
+<h3>
+    Profile
+</h3>
+<a href="/api/basket">Basket</a>
+<a href="/api/purchases">Purchases</a>
+<a href="/api">Main Page</a>
+</body>
+</html>
